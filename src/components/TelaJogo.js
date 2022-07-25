@@ -64,13 +64,15 @@ export default function TelaJogo({screen_class}) {
     const [almost,setAlmost]= React.useState(0)
     const [right,setRight]= React.useState(0)
 
-    const [bottom_icon,setBottom_icon]=React.useState(["","","",""])
+    const [bottom_icon,setBottom_icon]=React.useState([" "," "," "," "])
 
     function update_wrong (index){
         setWrong(wrong+1)
         set_card_state_l[index]({text:init_text[index],icon:<ion-icon name="close-circle"></ion-icon>,class:'flashcard',text_class:"strikethrough-red",
         class_inner_divs:["hide_screen","hide_screen","hide_screen","hide_screen"]});
-        setBottom_icon(bottom_icon.splice(wrong+almost+right,1,"close-circle"));
+        alert(bottom_icon)
+        setBottom_icon(bottom_icon.unshift("close-circle"));
+        setBottom_icon(bottom_icon.slice(0,bottom_icon.length-1));
         console.log(bottom_icon)
     }
 
@@ -78,14 +80,18 @@ export default function TelaJogo({screen_class}) {
         setAlmost(almost+1)
         set_card_state_l[index]({text:init_text[index],icon:<ion-icon name="help-circle"></ion-icon>,class:'flashcard',text_class:"strikethrough-orange",
         class_inner_divs:["hide_screen","hide_screen","hide_screen","hide_screen"]});
-        setBottom_icon(bottom_icon.splice(wrong+almost+right,1,"help-circle"));
+        setBottom_icon(bottom_icon.unshift("help-circle"));
+        setBottom_icon(bottom_icon.slice(0,bottom_icon.length-1));
+        console.log(bottom_icon)
     }
 
     function update_right (index){
         setRight(right+1)
         set_card_state_l[index]({text:init_text[index],icon:<ion-icon name="checkmark-circle"></ion-icon>,class:'flashcard',text_class:"strikethrough-green",
         class_inner_divs:["hide_screen","hide_screen","hide_screen","hide_screen"]});
-        setBottom_icon(bottom_icon.splice(wrong+almost+right,1,"checkmark-circle"));
+        setBottom_icon(bottom_icon.unshift("checkmark-circle"));
+        setBottom_icon(bottom_icon.slice(0,bottom_icon.length-1));
+        console.log(bottom_icon)
     }
 
     function change_state(n_click,c_index){
@@ -130,10 +136,10 @@ export default function TelaJogo({screen_class}) {
             <div className={screen_class[3]}>
                    "{almost+wrong+right}/4 Concluídos" 
                    <div class="footer_icons"> 
-                        <ion-icon name={bottom_icon[0]}></ion-icon>
-                        <ion-icon name={bottom_icon[1]}></ion-icon>
-                        <ion-icon name={bottom_icon[2]}></ion-icon>
                         <ion-icon name={bottom_icon[3]}></ion-icon>
+                        <ion-icon name={bottom_icon[2]}></ion-icon>
+                        <ion-icon name={bottom_icon[1]}></ion-icon>
+                        <ion-icon name={bottom_icon[0]}></ion-icon>
                    </div>
             </div>
         </div>
