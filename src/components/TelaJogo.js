@@ -17,7 +17,12 @@ function compare() {
 function choose_questions(){
     let questions_list_chosen=[];
     let answer_list_chosen=[];
-    let quest_index = Array.from({length: questions_list.length}, (_, index) => index + 1);
+    let quest_index=[];
+
+    for (let i=0;i<questions_list.length;i++){
+        quest_index.push(i);
+    }
+    console.log(quest_index)
 
     quest_index.sort(compare);
     let quest_index_choosen=quest_index.slice(0,n_quest);
@@ -33,7 +38,6 @@ function choose_questions(){
 
 export default function TelaJogo({screen_class}) { 
    let [questions_list_chosen,answer_list_chosen]=choose_questions()
-
     return (
         <div>
             <div className={screen_class[1]}>
